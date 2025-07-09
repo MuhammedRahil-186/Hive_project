@@ -122,7 +122,7 @@ class _ScreenhomeState extends State<Screenhome> {
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
-                                          '${eachdata.duration} min',
+                                          '${eachdata.duration} minimum',
                                           style: const TextStyle(
                                             fontSize: 13,
                                             color: Colors.indigo,
