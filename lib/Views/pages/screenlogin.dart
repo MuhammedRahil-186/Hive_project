@@ -1,6 +1,4 @@
-
 import 'package:first_project_hive/Views/pages/screenregister.dart';
-import 'package:first_project_hive/constant/imageconstants.dart';
 import 'package:first_project_hive/constant/textconstant.dart';
 import 'package:first_project_hive/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,135 +13,155 @@ class Screenlogin extends StatefulWidget {
 class _ScreenloginState extends State<Screenlogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned.fill(
-            top: 120,
-            bottom: 100,
-            left: 110,
-            child: Text(
-              Textconstants.loginWelcome,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xff00b4d8), Color(0xff03045e)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 90),
+            const Text(
+              'Welcome Back',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                color: const Color.fromARGB(255, 45, 89, 163),
+                color: Colors.white,
                 fontSize: 50,
                 fontFamily: 'Anton',
               ),
             ),
-          ),
-          Positioned.fill(
-            top: 680,
-            child: Image.asset(
-              ImageConstants.bookimage,
-              fit: BoxFit.contain,
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      hintText: Textconstants.emaillog,
-                      prefixIcon: Icon(Icons.person),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 16,
-                      ),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-
-                  TextField(
-                    obscureText: true,
-                    controller: passController,
-                    decoration: InputDecoration(
-                      hintText: Textconstants.passwordlog,
-                      prefixIcon: Icon(Icons.lock),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 16,
-                      ),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 24),
-
-                  SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        final emaill = emailController.text;
-                        final pass = passController.text;
-                        if (emaill.isEmpty || pass.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(Textconstants.allfieldsreq)),
-                          );
-                        }else{
-                          login(email: emaill,pass: pass,context: context);
-                        
-
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 45, 89, 163),
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Text(
-                        Textconstants.loginSignin,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        Textconstants.logindonthaveac,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Screenregister(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          Textconstants.loginSignup,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
+            const SizedBox(height: 120),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            offset: Offset(0, 5),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              hintText: Textconstants.emaillog,
+                              prefixIcon: const Icon(Icons.person),
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          TextField(
+                            controller: passController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: Textconstants.passwordlog,
+                              prefixIcon: const Icon(Icons.lock),
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final email = emailController.text;
+                                final pass = passController.text;
+                                if (email.isEmpty || pass.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(Textconstants.allfieldsreq),
+                                    ),
+                                  );
+                                } else {
+                                  login(
+                                    email: email,
+                                    pass: pass,
+                                    context: context,
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff03045e),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text(
+                                Textconstants.loginSignin,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.1,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(Textconstants.logindonthaveac),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => Screenregister(),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  'Sign up',
+                                  style: TextStyle(
+                                    color: Color(0xff0077b6),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
